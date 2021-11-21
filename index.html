@@ -1,29 +1,40 @@
-<html>
-<head>
-  <title>A Leaflet map!</title>
-  <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css" />
-  <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
-  <style>
-    #map{ width: 100%; height: 100%; }
-  </style>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <style>
+      html, body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #map {
+        /* configure the size of the map */
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // initialize Leaflet
+      var map = L.map('map').setView({lon:118.3768183, lat:-2.3734632}, 5.41);
 
-  <div id="map"></div>
+      // add the OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+      }).addTo(map);
 
-  <script>
+      // show the scale bar on the lower left corner
+      L.control.scale({imperial: true, metric: true}).addTo(map);
 
-  // initialize the map
-  var map = L.map('map').setView([42.35, -71.08], 13);
-
-  // load a tile layer
-  L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png',
-    {
-      attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
-      maxZoom: 17,
-      minZoom: 9
-    }).addTo(map);
-
-  </script>
-</body>
+      // // show a marker on the map
+      // L.marker({lon: 0, lat: 0}).bindPopup('The center of the world').addTo(map);
+    </script>
+  </body>
 </html>
